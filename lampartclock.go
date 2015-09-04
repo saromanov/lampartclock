@@ -1,12 +1,10 @@
 package lampartclock
 
-import
-(
-	"sync"
+import (
 	"sync/atomic"
 )
 
-type LampartClock {
+type LampartClock struct {
 	counter uint64
 }
 
@@ -16,15 +14,15 @@ func (lc *LampartClock) Inc() {
 }
 
 //Get provides current counter
-func (lc *LampartClock) Get() int64 {
+func (lc *LampartClock) Get() uint64 {
 	return atomic.LoadUint64(&lc.counter)
 }
 
 func (lc *LampartClock) Set(num uint64) {
 	value := lc.Get()
 	if num < value {
-		return 
+		return
 	} else {
-		atomic.StoreUnit64(&lc.counter, num)
+		atomic.StoreUint64(&lc.counter, num)
 	}
 }
