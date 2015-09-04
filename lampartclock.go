@@ -24,5 +24,7 @@ func (lc *LampartClock) Set(num uint64) {
 	value := lc.Get()
 	if num < value {
 		return 
+	} else {
+		atomic.StoreUnit64(&lc.counter, num)
 	}
 }
