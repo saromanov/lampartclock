@@ -28,3 +28,12 @@ func (lam *Lampart) Send(title string)(error) {
 	clock.Inc()
 	return nil
 }
+
+func (lam *Lampart) GetCounter(title string) (uint64, error) {
+	clock, ok := lam.nodes[title]
+	if !ok {
+		return 0, errors.New(fmt.Sprintf("Node with name %s is not found", title))
+	}
+
+	return clock.Get(), nil
+}
